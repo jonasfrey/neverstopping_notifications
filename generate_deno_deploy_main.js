@@ -8,6 +8,7 @@ var s_js = await Deno.readTextFile(s_path_file_js)
 var s_html_full = s_html.replace(`<script type="module" async defer src="client.module.js"></script>`, 
 `<script type='module'>${s_js}</script>`
 );
+s_html_full = s_html_full.replaceAll(String.fromCharCode(92),String.fromCharCode(92,92));
 s_html_full = s_html_full.replaceAll('`', '\\`');
 s_html_full = s_html_full.replaceAll('${', '\\${');
 var s_js_webserver = `

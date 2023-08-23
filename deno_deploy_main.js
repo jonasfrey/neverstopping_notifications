@@ -195,14 +195,14 @@ let f_o_label_title_with_icon = function(s_innerText, s_class){
                             {
                                 class: "clickable",
                                 s_tag: "textarea", 
-                                value: o_state.a_s_task.join("\n"),
+                                value: o_state.a_s_task.join("\\n"),
                                 rows: (()=>{
                                     return o_state.a_s_task.length
                                 })(),
                                 oninput: ()=>{
                                     let o_el = window.event?.target;
                                     // o_js__everything?._f_render()
-                                    o_state.a_s_task = o_el.value.split('\n')
+                                    o_state.a_s_task = o_el.value.split('\\n')
                                     let n_lines = o_state.a_s_task.length;
                                     o_el.setAttribute('rows', n_lines)
                                 }
@@ -353,7 +353,7 @@ let f_o_label_title_with_icon = function(s_innerText, s_class){
                 cursor:pointer;
             }
         \`
-    }).join("\n")}
+    }).join("\\n")}
     .position_relative{
         position:relative
     }
@@ -418,7 +418,7 @@ let f_o_label_title_with_icon = function(s_innerText, s_class){
                 .pb-\${s_n}_rem{padding-bottom: \${num}rem}
             \`
         }
-    ).join("\n")} \`;
+    ).join("\\n")} \`;
     console.log(s_core_css)
     let s_css = \`
             \${s_core_css}
