@@ -56,6 +56,11 @@ window.o_state = {
     b_notification_permission: false,
     n_id_f_recursive : 0, 
 };
+let f_notify_s_task = function(){
+    let s_task = o_state.a_s_task_history.at(-1);
+    document.title = s_task
+    var o_notification = new Notification(s_task);
+}
 let f_push_s_task = function(){
 
     if(!o_state.b_next_task_random){
@@ -74,7 +79,7 @@ let f_recursive = function(){
     if((o_state.n_ms_delta_last_task) > (o_state.n_min_repeat * 60*1000)){
         o_state.n_ts_ms_last_notification = new Date().getTime();
         f_push_s_task(); 
-        var o_notification = new Notification(o_state.a_s_task_history.at(-1));
+        f_notify_s_task();
         f_push_s_task(); 
     }
     o_js__next_task?._f_render()
@@ -227,7 +232,8 @@ let f_o_label_title_with_icon = function(s_innerText, s_class){
                                 onclick: ()=>{
                                     o_state.n_ts_ms_last_notification = new Date().getTime()
                                     f_push_s_task(); 
-                                    var o_notification = new Notification(o_state.a_s_task_history.at(-1));
+                                    f_notify_s_task();
+
                                 }
                             }, 
                             o_js__next_task
@@ -414,6 +420,3 @@ let f_o_label_title_with_icon = function(s_innerText, s_class){
     //     `.${s_version_class}`
     // );
     f_add_css(s_css)
-
-
-
