@@ -114,7 +114,7 @@ o_state.b_notification_permission = Notification.permission == 'granted'
 
 o_state.n_ts_ms_last_notification = new Date().getTime()
 f_push_s_task(); 
-var o_notification = new Notification(o_state.a_s_task_history.at(-1));
+f_notify_s_task();
 
 f_ask_permission()
 Notification.requestPermission().then(function(p) {
