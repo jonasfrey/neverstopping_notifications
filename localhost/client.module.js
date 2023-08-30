@@ -35,9 +35,7 @@ let f_download_text_file = function(
 
 // f_download_text_file("lol.txt", 'this is lol')
 
-let f_v_random = function(a_v){
-    return a_v[parseInt(Math.random()*a_v.length-1)]
-}
+
 
 window.o_state = {
     a_s_task_history: [],
@@ -46,7 +44,9 @@ window.o_state = {
         "l-sit: 10 breath's", 
         "knee-raises: 10", 
         "diamond-push-ups: 10", 
-        "dip-to-lsit: 5"
+        "dip-to-lsit: 5", 
+        "rows tucked knees: 10", 
+        "rows straight legs: 5"
     ],
     n_idx_a_s_task: 0,
     b_next_task_random: true,
@@ -67,7 +67,7 @@ let f_push_s_task = function(){
         o_state.n_idx_a_s_task = (o_state.n_idx_a_s_task+1)%o_state.a_s_task.length
     }
     if(o_state.b_next_task_random){
-        o_state.n_idx_a_s_task = parseInt(Math.random()*(o_state.a_s_task.length-1));
+        o_state.n_idx_a_s_task = parseInt(Math.random()*(o_state.a_s_task.length));
     }
     
     o_state.a_s_task_history.push(o_state.a_s_task[o_state.n_idx_a_s_task]);
@@ -143,13 +143,20 @@ let f_o_label_title_with_icon = function(s_innerText, s_class){
         ]
     }
 }
+    let f_s_hms__from_n_ms = function(n_ms){
+        let n_s = (n_ms / 1000)
+        let n_m = n_s / 60
+        let n_h = n_m / 60
+        let s = `${(parseInt(n_h).toString().padStart(2, '0'))}:${(parseInt(n_m).toString().padStart(2, '0'))}:${((n_s%60).toFixed(3).toString().padStart(5, '0'))}` 
+        return s
+    }
     o_js__next_task = {
         f_o_js: function(){
             return {
                 a_o:[
                     {
                         s_tag: "label", 
-                        innerText: `Next Task (${o_state.a_s_task_history.at(-1)}) (${o_state.n_min_repeat - (o_state.n_ms_delta_last_task/1000/60)} mins) `
+                        innerText: `Next Task in ${(f_s_hms__from_n_ms((o_state.n_min_repeat*60*1000)-o_state.n_ms_delta_last_task))} (${o_state.a_s_task_history.at(-1)})  `
                     }
                 ]
             }
@@ -175,7 +182,7 @@ let f_o_label_title_with_icon = function(s_innerText, s_class){
                         a_o:[
                             {
                                 s_tag: "label", 
-                                innerText: "Tasks"
+                                innerText: "Tasks (click to edit)"
                             },
                             {
                                 class: "clickable",
@@ -408,6 +415,9 @@ let f_o_label_title_with_icon = function(s_innerText, s_class){
     console.log(s_core_css)
     let s_css = `
             ${s_core_css}
+            .app{
+                padding: 2rem;
+            }
             .app, .inputs{
                 display:flex;
                 flex-direction: column;
