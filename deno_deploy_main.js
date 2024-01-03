@@ -6,7 +6,6 @@ async function handleRequest(o_request) {
 
   const o_url = new URL(o_request.url);
 
-
   let s_directory = o_url.hostname;
 //   console.log(s_directory);
   let s_name_path__from_url = o_url.pathname
