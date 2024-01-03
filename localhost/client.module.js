@@ -13,7 +13,7 @@ o_variables.n_rem_padding_interactive_elements = 0.5; // adjust padding for inte
 let s_css = f_s_css_from_o_variables(
     o_variables
 )
-console.log(s_css)
+// console.log(s_css)
 f_add_css(
     `
     ${s_css}
